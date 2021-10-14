@@ -1,0 +1,57 @@
+{
+  "editor.tabSize": 4,
+  "window.zoomLevel": 0,
+  "extensions.ignoreRecommendations": true,
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "eslint.options": {
+    "extensions": [".js", ".vue", ".ts"]
+  },
+  "prettier.printWidth": 120,
+  "prettier.tabWidth": 4,
+  "prettier.vueIndentScriptAndStyle": true,
+  "files.associations": {
+    "*.vue": "vue"
+  },
+  "editor.formatOnSave": true,
+  "workbench.editor.enablePreview": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "files.autoSave": "off",
+  "workbench.editor.showTabs": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.linkedEditing": true
+  },
+  "window.title": "${activeEditorLong}${separator}${rootName}",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "workbench.tree.indent": 16,
+  "workbench.iconTheme": "vscode-great-icons",
+  "prettier.singleQuote": true,
+  "editor.wordWrapColumn": 120,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.settings.useSplitJSON": true,
+  "workbench.settings.editor": "json",
+  "eslint.alwaysShowStatus": true
+}
