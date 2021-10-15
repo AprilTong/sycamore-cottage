@@ -10,6 +10,7 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style>
+@charset "UTF-8";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

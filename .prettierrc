@@ -1,9 +1,11 @@
 {
   "useTabs": false,
-  "tabWidth": 2,
+  "tabWidth": 4,
+  "tabSize": 4,
   "printWidth": 100,
   "singleQuote": true,
   "trailingComma": "none",
   "bracketSpacing": true,
-  "semi": false
+  "semi": false,
+  "eslintIntegration": true
 }
