@@ -53,5 +53,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "workbench.settings.useSplitJSON": true,
     "workbench.settings.editor": "json",
-    "eslint.alwaysShowStatus": true
+    "eslint.alwaysShowStatus": true,
+    "eslint.validate": ["javascript", "vue", "html", "typescript"]
 }

@@ -19,6 +19,17 @@ module.exports = {
          */
         eqeqeq: [2, 'allow-null'],
         // 允许使用自增、自减
-        allowForLoopAfterthoughts: true
+        allowForLoopAfterthoughts: 'off',
+        'no-plusplus': 'off',
+        // 可以更改函数入参
+        'no-param-reassign': 'off',
+        // 允许使用require
+        'global-require': 'off',
+        'import/no-unresolved': [2, { caseSensitiveStrict: true }],
+        'import/resolver': {
+            node: {
+                paths: ['src']
+            }
+        }
     }
 }

@@ -1,50 +1,53 @@
 {
-  "name": "test",
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.{vue,js,ts}": "eslint --fix"
-  },
-  "dependencies": {
-    "axios": "^0.23.0",
-    "element-plus": "^1.1.0-beta.20",
-    "vue": "^3.2.16",
-    "vue-router": "4",
-    "vuex": "^4.0.2"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^13.2.1",
-    "@commitlint/config-conventional": "^13.2.0",
-    "@types/node": "^16.10.9",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "@vitejs/plugin-vue": "^1.9.3",
-    "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "^3.3.0",
-    "cz-customizable": "^6.3.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^7.19.1",
-    "husky": "^7.0.2",
-    "less": "^4.1.2",
-    "less-loader": "^10.1.0",
-    "lint-staged": "^11.2.3",
-    "prettier": "^2.4.1",
-    "typescript": "^4.4.3",
-    "vite": "^2.6.7",
-    "vue-tsc": "^0.3.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-customizable"
+    "name": "test",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "start": "vite",
+        "build": "vue-tsc --noEmit && vite build",
+        "serve": "vite preview",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "*.{vue,js,ts}": "eslint --fix"
+    },
+    "dependencies": {
+        "axios": "^0.23.0",
+        "element-plus": "^1.1.0-beta.20",
+        "lodash": "^4.17.21",
+        "three": "^0.133.1",
+        "vue": "^3.2.16",
+        "vue-router": "4",
+        "vuex": "^4.0.2"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^13.2.1",
+        "@commitlint/config-conventional": "^13.2.0",
+        "@types/node": "^16.10.9",
+        "@typescript-eslint/eslint-plugin": "^5.0.0",
+        "@typescript-eslint/parser": "^5.0.0",
+        "@vitejs/plugin-vue": "^1.9.3",
+        "commitizen": "^4.2.4",
+        "cz-conventional-changelog": "^3.3.0",
+        "cz-customizable": "^6.3.0",
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-vue": "^7.19.1",
+        "husky": "^7.0.2",
+        "less": "^4.1.2",
+        "less-loader": "^10.1.0",
+        "lint-staged": "^11.2.3",
+        "prettier": "^2.4.1",
+        "typescript": "^4.4.3",
+        "vite": "^2.6.7",
+        "vue-tsc": "^0.3.0"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-customizable"
+        }
     }
-  }
 }
