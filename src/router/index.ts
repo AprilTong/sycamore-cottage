@@ -1,8 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import loginRoute from './login'
+import componentRoute from './components'
 
 const routes: Array<RouteRecordRaw> = [
-    ...loginRoute
+    ...loginRoute,
+    ...componentRoute
 ]
 
 const router = createRouter({

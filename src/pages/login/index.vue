@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import * as THREE from 'three'
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { defineComponent, onMounted, ref, reactive, toRefs, unref } from 'vue'
@@ -130,7 +130,8 @@ export default defineComponent({
         const formField = reactive({
             user: '',
             pass: '',
-            code: ''
+            code: '',
+            whetherAutoLogin: false
         })
         // 表单校验规则
         const formRules = {
@@ -236,7 +237,7 @@ export default defineComponent({
         }
         // 初始化背景（盒模型背景，视角在盒子里面，看到的是盒子内部）
         const initSceneBg = () => {
-            new THREE.TextureLoader().load(import('@/assets/images/sky.png'), (texture) => {
+            new THREE.TextureLoader().load(import('@/assets/images/sky.png') as any, (texture) => {
                 const geometry = new THREE.BoxGeometry(width, height, depth) // 创建一个球形几何体 SphereGeometry
                 const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide }) // 创建基础为网格基础材料
                 const mesh = new THREE.Mesh(geometry, material)
@@ -307,7 +308,9 @@ export default defineComponent({
         const initSphereModal = () => {
             // 材质
             const material = new THREE.MeshPhongMaterial()
-            material.map = new THREE.TextureLoader().load(import('@/assets/images/earth_bg.png'))
+            material.map = new THREE.TextureLoader().load(
+                import('@/assets/images/earth_bg.png') as any
+            )
             material.blendDstAlpha = 1
             // 几何体
             sphereGeometry = new THREE.SphereGeometry(50, 64, 32)
@@ -336,7 +339,7 @@ export default defineComponent({
             scene.add(tube)
             const clondGeometry = new THREE.PlaneGeometry(geometryWidth, geometryHeigh)
             const textureLoader = new THREE.TextureLoader()
-            const cloudTexture = textureLoader.load(import('@/assets/images/cloud.png'))
+            const cloudTexture = textureLoader.load(import('@/assets/images/cloud.png') as any)
             const clondMaterial = new THREE.MeshBasicMaterial({
                 map: cloudTexture,
                 blending: THREE.AdditiveBlending,
@@ -356,8 +359,8 @@ export default defineComponent({
             const vertices: number[] = []
             const pointsGeometry: any[] = []
             const textureLoader = new THREE.TextureLoader()
-            const sprite1 = textureLoader.load(import('@/assets/images/starflake1.png'))
-            const sprite2 = textureLoader.load(import('@/assets/images/starflake2.png'))
+            const sprite1 = textureLoader.load(import('@/assets/images/starflake1.png') as any)
+            const sprite2 = textureLoader.load(import('@/assets/images/starflake2.png') as any)
             parameters = [
                 [[0.6, 100, 0.75], sprite1, 50],
                 [[0, 0, 1], sprite2, 20]
