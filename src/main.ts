@@ -4,6 +4,7 @@ import router from './router/index'
 import store from './store/index'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import './assets/css/reset.less'
 
 
 createApp(App).use(ElementPlus).use(router).use(store).mount('#app')

@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "axios": "^0.23.0",
-        "element-plus": "^1.1.0-beta.20",
+        "element-plus": "^2.0.1",
         "lodash": "^4.17.21",
         "three": "^0.133.1",
         "vue": "^3.2.16",
@@ -49,7 +49,7 @@
     },
     "config": {
         "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
+            "path": "./node_modules/cz-customizable"
         }
     }
 }
