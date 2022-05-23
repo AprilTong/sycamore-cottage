@@ -12,6 +12,8 @@
         "*.{vue,js,ts}": "eslint --fix"
     },
     "dependencies": {
+        "@antv/g6": "^4.6.4",
+        "@antv/x6": "^1.32.2",
         "axios": "^0.23.0",
         "element-plus": "^2.0.1",
         "lodash": "^4.17.21",

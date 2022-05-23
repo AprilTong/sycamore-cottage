@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div class="left">
+        <!-- <div class="left">
             <el-menu
                 router
                 background-color="#2f4050"
@@ -11,7 +11,7 @@
                     <span>tagInput</span>
                 </el-menu-item>
             </el-menu>
-        </div>
+        </div> -->
         <div class="right">
             <router-view></router-view>
         </div>
