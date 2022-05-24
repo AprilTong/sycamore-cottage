@@ -41,14 +41,20 @@ export function renderMap(data, graph) {
             const styles = this.getShapeStyle(cfg)
             const { labelCfg = {} } = cfg
 
+            const w = cfg.size[0]
+            const h = cfg.size[1]
+            console.log('123', w, h)
             const keyShape = group.addShape('rect', {
                 attrs: {
                     ...styles,
                     cursor: 'pointer',
                     x: 0,
-                    y: 0
+                    y: 0,
+                    width: w, //200,
+                    height: h, // 60
                 },
-                name: 'node-rect'
+                name: 'node-rect',
+                draggable: true
             })
 
             /**
@@ -128,6 +134,7 @@ export function renderMap(data, graph) {
                     attrs: {
                         ...labelCfg.style,
                         text: cfg.label,
+                        textAlign: 'left',
                         x: 50,
                         y: 25,
                     }
@@ -150,15 +157,6 @@ export function renderMap(data, graph) {
                 })
 
             return keyShape
-            // return group?.addShape('dom', {
-            //     attrs: {
-            //         ...styles,
-            //         cursor: 'pointer',
-            //         x: 0,
-            //         y: 0
-            //     },
-            //     html: `<span>123</span>`
-            // })
         },
         setState(name, value, item) {
             let group = item?.getContainer()
@@ -195,7 +193,8 @@ export function renderMap(data, graph) {
                     })
                 }
             }
-        }
+        },
+        update: undefined,
     }, 'rect')
 
     G6.registerEdge('flow-line', {

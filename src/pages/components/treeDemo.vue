@@ -68,8 +68,8 @@ const state = reactive({
     idBoxList: []
 })
 onMounted(() => {
-    initDom()
-    // initTreeData()
+    // initDom()
+    initTreeData()
     // initData()
 })
 const initData = async () => {
@@ -317,23 +317,27 @@ const initTreeData = () => {
 }
 
 const initDom = () => {
-    G6.registerNode('card-node', {
-        draw: (cfg, group) => {
-            return group.addShape('dom', {
-                attrs: {
-                    width: 500,
-                    height: 316,
-                    html: `
+    G6.registerNode(
+        'card-node',
+        {
+            draw: (cfg, group) => {
+                return group.addShape('dom', {
+                    attrs: {
+                        width: 500,
+                        height: 316,
+                        html: `
          <div style="border:1px solid #2196f3;border-radius:5px;">
          <div style="text-align:center;background:#2196f3;font-size:18px;color:#fff;font-weight:bold;">${cfg.label}</div>
-       
-        </div> 
+
+        </div>
            `
-                },
-                draggable: true
-            })
-        }
-    })
+                    },
+                    draggable: true
+                })
+            }
+        },
+        'rect'
+    )
     const data = {
         nodes: [
             { id: 'node1', x: 50, y: 100 },

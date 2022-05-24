@@ -24,7 +24,7 @@ const inputRref = ref()
 const state = reactive({
     showInput: false,
     input: '',
-    graph: {},
+    graph: {} as any,
     inputStyle: {
         left: '0px',
         top: '0px'
@@ -148,7 +148,8 @@ const initData = () => {
     const defaultLabelCfg = {
         style: {
             fill: '#000',
-            fontSize: 12
+            fontSize: 12,
+            textAlign: 'left'
         }
     }
     const defaultLayout = {
@@ -201,17 +202,19 @@ const initData = () => {
         layout: defaultLayout
     })
     //节点双击事件，这里的编辑页面用的是浏览器的弹窗，也可自己编写页面进行调用
-    state.graph.on('node:dblclick', (evt, element) => {
-        const { item, target } = evt
-        const targetType = target.get('type')
-        state.graph.setItemState(item, 'selected', true)
-        const name = target.get('name')
+    // state.graph.on('node:dblclick', (evt, element) => {
+    //     const { item, target } = evt
+    //     const targetType = target.get('type')
+    //     state.graph.setItemState(item, 'selected', true)
+    //     const name = target.get('name')
 
-        console.log(target)
-        var str = prompt('随便写点儿啥吧', target.attrs.text)
-    })
-    state.graph.on('node:click', (evt) => {
+    //     const curTarget = state.graph.findDataById(item._cfg.id)
+
+    //     let str = prompt('随便写点儿啥吧', target.attrs.text)
+    // })
+    state.graph.on('node:click', (evt: any) => {
         const { item, target } = evt
+
         const targetType = target.get('type')
         const name = target.get('name')
 
@@ -222,10 +225,10 @@ const initData = () => {
                 if (!model.children) {
                     model.children = []
                 }
-                const id = 'ra'
+                const id = 'ra' + Math.random()
                 var str = prompt('请输入节点名称', '比如c3-3-4')
                 if (str) {
-                    target.attrs.text = str
+                    target.attrs.label = str
                     model.children.push({
                         id,
                         name: 1,
@@ -241,9 +244,13 @@ const initData = () => {
         }
         const curTarget = state.graph.findDataById(item._cfg.id)
         const canvasXY = state.graph.getCanvasByPoint(curTarget.x, curTarget.y)
-        state.editOneId = cloneDeep(item._cfg.id)
-        state.showInput = true
+        // state.editOneId = cloneDeep(item._cfg.id)
+        state.editOneId = evt
+        // state.graph.updateItem(item, {
+        //     label: '点击'
+        // })
         state.input = curTarget.label
+        state.showInput = true
         nextTick(() => {
             inputRref.value.focus()
         })
@@ -252,18 +259,28 @@ const initData = () => {
             top: canvasXY.y + 'px'
         }
     })
-    renderMap(state.data, state.graph) //别忘了渲染
+    renderMap(state.data, state.graph) //渲染
 }
 // 编辑失去焦点
 const focusInput = () => {
-    const item = state.graph.findById(state.editOneId)
-    console.log('hsahh', item)
-    state.data.children[0].label = state.input
-    state.graph.updateItem(item, {
-        label: '123'
+    const { item } = state.editOneId
+    console.log('123', item._cfg.id)
+    // const item = state.graph.findById(state.editOneId)
+    // state.data.children[0].label = state.input
+    // let model = state.editOneId
+    // item.update({
+    //     ...item,
+    //     label: state.input
+    // })
+    state.graph.updateItem(item._cfg.id, {
+        label: state.input
     })
+    // state.graph.get('canvas').set('localRefresh', false)
+    // // state.graph.refreshItem(item)
+    // item._cfg.model.label = state.input
+    // state.graph.refreshItem(item)
     state.showInput = false
-    // state.graph.data(state.data)
+    // state.graph.fitView()
     // state.graph.render()
 }
 </script>
