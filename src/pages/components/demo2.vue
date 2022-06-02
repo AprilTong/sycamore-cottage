@@ -259,11 +259,16 @@ const initData = () => {
             top: canvasXY.y + 'px'
         }
     })
+
     renderMap(state.data, state.graph) //渲染
 }
 // 编辑失去焦点
 const focusInput = () => {
     const { item } = state.editOneId
+    state.graph.updateItem(item._cfg.id, {
+        label: state.input
+    })
+    state.showInput = false
     console.log('123', item._cfg.id)
     // const item = state.graph.findById(state.editOneId)
     // state.data.children[0].label = state.input
@@ -272,14 +277,12 @@ const focusInput = () => {
     //     ...item,
     //     label: state.input
     // })
-    state.graph.updateItem(item._cfg.id, {
-        label: state.input
-    })
+
     // state.graph.get('canvas').set('localRefresh', false)
     // // state.graph.refreshItem(item)
     // item._cfg.model.label = state.input
     // state.graph.refreshItem(item)
-    state.showInput = false
+
     // state.graph.fitView()
     // state.graph.render()
 }

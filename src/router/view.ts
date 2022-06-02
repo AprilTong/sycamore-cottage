@@ -4,6 +4,7 @@ import TagInput from '@/pages/components/tagInput.vue'
 import TreeDemo from '@/pages/components/treeDemo.vue'
 import Demo from '@/pages/components/demo2.vue'
 import Upload from '@/pages/components/upload.vue'
+import TagInput2 from '@/pages/components/tagInput2.vue'
 
 const viewRoute: Array<RouteRecordRaw> = [
     {
@@ -27,10 +28,15 @@ const viewRoute: Array<RouteRecordRaw> = [
                 component: Demo
             },
             {
-                path: '/upload',
+                path: '/upload/:id?',
                 name: 'upload',
                 component: Upload
-            }
+            },
+            {
+                path: '/tag',
+                name: 'tag',
+                component: TagInput2
+            },
         ]
     },
 

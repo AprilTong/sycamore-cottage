@@ -14,8 +14,9 @@
     "dependencies": {
         "@antv/g6": "^4.6.4",
         "@antv/x6": "^1.32.2",
+        "@sipec/vue3-tags-input": "^3.0.4",
         "axios": "^0.23.0",
-        "element-plus": "^2.0.1",
+        "element-plus": "^2.2.2",
         "lodash": "^4.17.21",
         "three": "^0.133.1",
         "vue": "^3.2.16",

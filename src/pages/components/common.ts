@@ -39,11 +39,11 @@ export function renderMap(data, graph) {
         },
         draw(cfg, group) {
             const styles = this.getShapeStyle(cfg)
+
             const { labelCfg = {} } = cfg
 
             const w = cfg.size[0]
             const h = cfg.size[1]
-            console.log('123', w, h)
             const keyShape = group.addShape('rect', {
                 attrs: {
                     ...styles,
