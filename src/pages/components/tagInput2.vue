@@ -1,5 +1,5 @@
-<template>
-    <div class="input tags-wrap">
+<!-- <template>
+    <div class="input tags-wrap" v-click-outside="onClickOutside">
         <div class="tags" transition="tags" v-for="(item, index) in dis_source">
             <span class="content">{{ item }}</span>
             <span class="del" @click="delOne(index)">&times;</span>
@@ -16,7 +16,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue'
+import { ClickOutside as vClickOutside } from 'element-plus'
 export default defineComponent({
+    directives: { vClickOutside },
     setup() {
         const state = reactive({
             text: '',
@@ -36,11 +38,16 @@ export default defineComponent({
         const delOne = (index: number) => {
             state.dis_source.splice(index, 1)
         }
+        const onClickOutside = () => {
+            console.log('1234')
+        }
+
         return {
             ...toRefs(state),
             add,
             del,
-            delOne
+            delOne,
+            onClickOutside
         }
     }
 })
@@ -102,6 +109,77 @@ export default defineComponent({
             top: -1px;
             right: 0;
         }
+    }
+}
+</style> -->
+<template>
+    <div class="con">
+        <div v-for="item in list" class="one" :key="item.id">
+            <span v-if="!item.isEdit" class="label">
+                {{ item.label }}
+            </span>
+            <el-input
+                v-else
+                v-model="item.label"
+                @blur="blur(item)"
+                :ref="inputRefs"
+                class="flex"
+            ></el-input>
+            <span @click="edit(item)" class="edit">编辑</span>
+        </div>
+    </div>
+</template>
+<script lang="ts" setup>
+import { reactive, nextTick } from 'vue'
+let itemRefs: any[] = []
+const inputRefs = (el: any) => {
+    if (el) {
+        itemRefs.push(el)
+    }
+}
+const list = reactive([
+    {
+        isEdit: false,
+        label: '数据1',
+        id: 1
+    },
+    {
+        isEdit: false,
+        label: '数据2',
+        id: 2
+    }
+])
+const edit = (item: any) => {
+    item.isEdit = true
+    nextTick(() => {
+        itemRefs[itemRefs.length - 1].select()
+    })
+}
+const blur = (item: any) => {
+    console.log('blur', item)
+    item.isEdit = false
+}
+</script>
+<style lang="less">
+.con {
+    margin: 50px;
+    .one {
+        height: 30px;
+        display: flex;
+        width: 200px;
+        background-color: #fff;
+        align-items: center;
+        margin-top: 5px;
+        .flex {
+            flex: 1;
+        }
+    }
+    .label {
+        width: 50px;
+    }
+    .edit {
+        cursor: pointer;
+        color: blue;
     }
 }
 </style>
