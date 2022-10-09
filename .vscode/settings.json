@@ -34,7 +34,7 @@
     "[less]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[scss]": {
+    "[less]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[json]": {

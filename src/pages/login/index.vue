@@ -47,9 +47,9 @@
                             ></el-checkbox>
                         </el-form-item>
                     </el-form>
-                    <el-button @click="submitForm" style="width: 100%" type="primary"
-                        >登录</el-button
-                    >
+                    <el-button @click="submitForm" style="width: 100%" type="primary">
+                        登录
+                    </el-button>
                 </div>
             </div>
         </div>
@@ -63,8 +63,13 @@ import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { defineComponent, onMounted, ref, reactive, toRefs, unref } from 'vue'
-import _ from 'lodash'
+import { random } from 'lodash'
 import { ElMessage } from 'element-plus'
+import axios from 'axios'
+import { setLocalStorage } from '@/utils/storage'
+import { addRoutes } from '@/router/addRoute'
+import { useRouter } from 'vue-router'
+import store from '@/store'
 
 export default defineComponent({
     name: 'login',
@@ -373,8 +378,8 @@ export default defineComponent({
                  * THREE.MathUtils.randFloatSpread(width)
                  */
                 const x: number = THREE.MathUtils.randFloatSpread(width)
-                const y: number = _.random(0, height / 2)
-                const z: number = _.random(-depth / 2, zAxisNumber)
+                const y: number = random(0, height / 2)
+                const z: number = random(-depth / 2, zAxisNumber)
                 vertices.push(x, y, z)
             }
             geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
@@ -504,6 +509,7 @@ export default defineComponent({
                 }
             })
         }
+        const router = useRouter()
         // 提交请求
         const submitHandle = async () => {
             const params = {
@@ -512,6 +518,16 @@ export default defineComponent({
                 verifyCode: formField.code
             }
             // 提交登陆请求
+            const { data } = (await axios.get('/api/user/login')) as any
+            const { token, menuList } = data.data
+            setLocalStorage('token', token)
+            setLocalStorage('menuList', menuList)
+            console.log(data)
+            await addRoutes()
+            const menuStore = store.state.menus
+            router.push({
+                path: menuStore.permissionMenu
+            })
         }
         const refsState = toRefs(state)
         return {
