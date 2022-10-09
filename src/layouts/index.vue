@@ -24,9 +24,9 @@ import layoutMain from './main/layoutMain.vue'
     padding: 0;
 }
 .main-container {
-    padding-top: 98px;
+    padding-top: 60px;
     padding-bottom: 0px;
-    padding-left: 62px;
+    padding-left: 200px;
     overflow: visible;
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
