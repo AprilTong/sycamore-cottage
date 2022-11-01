@@ -1,19 +1,11 @@
 <template>
-    <el-header
-        class="layout-header"
-        height="48px"
-        bg-bgColor
-        transition-all
-        duration-300
-        ease-in-out
-    >
+    <el-header class="layout-header" height="48px">
         <div class="logo" @click="onClickLogo">
-            <img src="/favicon.ico" />
-            <span class="text-2xl ml-2" color-primary>Build Element</span>
+            <img src="@/assets/images/logo.jpeg" />
+            <span>April的记录小屋</span>
 
             <div v-if="menu.isDrawer" i-ep-expand class="text-xl ml-2" />
         </div>
-        <div flex-1 />
         <el-space>
             <template v-if="!menu.isDrawer">
                 <!-- @click="toggleDark()" -->
@@ -21,11 +13,10 @@
                     <div v-if="isDark" i-ep-moon />
                     <div v-else i-ep-sunny />
                 </div>
-
                 <div class="right-item">
-                    <el-badge :value="12">
+                    <!-- <el-badge :value="12">
                         <div i-ep-bell-filled />
-                    </el-badge>
+                    </el-badge> -->
                 </div>
             </template>
 
@@ -87,17 +78,23 @@ function onLogout() {
     width: 100%;
     z-index: 1001;
     box-shadow: var(--el-box-shadow-lighter);
+    justify-content: space-between;
+    background-color: #001529;
+    color: #fff;
 }
 .logo {
     position: relative;
     display: flex;
     align-items: center;
     transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-
+    font-weight: bold;
+    font-size: 16px;
     img {
         display: inline-block;
         height: 32px;
         vertical-align: middle;
+        border-radius: 50%;
+        margin-right: 10px;
     }
 }
 
@@ -123,10 +120,11 @@ function onLogout() {
     }
 
     .nickname {
-        // color: #fff;
+        color: #fff;
         margin-left: 8px;
         display: flex;
         align-items: center;
+        font-weight: 700;
     }
 }
 </style>

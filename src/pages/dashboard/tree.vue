@@ -6,7 +6,7 @@
 </template>
 <script lang="ts" setup>
 import G6 from '@antv/g6'
-import { onMounted, reactive } from 'vue'
+
 const data = {
     defaultNode: {
         size: 80, // 节点大小
@@ -64,59 +64,6 @@ const data = {
         }
     ]
 }
-const state = reactive({
-    idBoxList: []
-})
-onMounted(() => {
-    // initDom()
-    initTreeData()
-    // initData()
-})
-const initData = async () => {
-    const response = await fetch(
-        'https://gw.alipayobjects.com/os/basement_prod/6cae02ab-4c29-44b2-b1fd-4005688febcb.json'
-    )
-    const remoteData = await response.json()
-    const nodes = remoteData.nodes
-    nodes.forEach((node: any) => {
-        if (!node.style) {
-            node.style = {}
-        }
-        switch (
-            node.class // 根据节点数据中的 class 属性配置图形
-        ) {
-            case 'c0': {
-                node.type = 'circle' // class = 'c0' 时节点图形为 circle
-                break
-            }
-            case 'c1': {
-                node.type = 'rect' // class = 'c1' 时节点图形为 rect
-                node.size = [35, 20] // class = 'c1' 时节点大小
-                break
-            }
-            case 'c2': {
-                node.type = 'ellipse' // class = 'c2' 时节点图形为 ellipse
-                node.size = [35, 20] // class = 'c2' 时节点大小
-                break
-            }
-        }
-    })
-    const graph = new G6.Graph({
-        container: 'box', // String | HTMLElement，必须，在 Step 1 中创建的容器 id 或容器本身
-        width: 800, // Number，必须，图的宽度
-        height: 500, // Number，必须，图的高度
-        // fitView: true,
-        // fitViewPadding: [20, 40, 50, 20],
-        layout: {
-            // Object，可选，布局的方法及其配置项，默认为 random 布局。
-            type: 'force', // 指定为力导向布局
-            preventOverlap: true // 防止节点重叠
-            // nodeSize: 30        // 节点大小，用于算法中防止节点重叠时的碰撞检测。由于已经在上一节的元素配置中设置了每个节点的 size 属性，则不需要在此设置 nodeSize。
-        }
-    })
-    graph.data(remoteData)
-    graph.render()
-}
 
 const initTreeData = () => {
     G6.registerNode('card-node', {
@@ -129,7 +76,7 @@ const initTreeData = () => {
                 attrs: {
                     x: -w / 2,
                     y: -h / 2,
-                    width: w, //200,
+                    width: w, // 200,
                     height: h, // 60
                     // stroke: color,
                     radius: r,
@@ -143,7 +90,7 @@ const initTreeData = () => {
                 attrs: {
                     x: -w / 2,
                     y: -h / 2,
-                    width: w, //200,
+                    width: w, // 200,
                     height: h / 2, // 60
                     // fill: '#333',
                     radius: [r, r, 0, 0]
@@ -316,47 +263,9 @@ const initTreeData = () => {
         }
 }
 
-const initDom = () => {
-    G6.registerNode(
-        'card-node',
-        {
-            draw: (cfg, group) => {
-                return group.addShape('dom', {
-                    attrs: {
-                        width: 500,
-                        height: 316,
-                        html: `
-         <div style="border:1px solid #2196f3;border-radius:5px;">
-         <div style="text-align:center;background:#2196f3;font-size:18px;color:#fff;font-weight:bold;">${cfg.label}</div>
-
-        </div>
-           `
-                    },
-                    draggable: true
-                })
-            }
-        },
-        'rect'
-    )
-    const data = {
-        nodes: [
-            { id: 'node1', x: 50, y: 100 },
-            { id: 'node2', x: 150, y: 100 }
-        ],
-        edges: [{ source: 'node1' }, { target: 'node2' }]
-    }
-    const graph = new G6.Graph({
-        container: 'box',
-        width: 500,
-        height: 500,
-        defaultNode: {
-            type: 'dom-node',
-            size: [120, 40]
-        }
-    })
-    graph.data(data)
-    graph.render()
-}
+onMounted(() => {
+    initTreeData()
+})
 </script>
 <style lang="less" scoped>
 .right {

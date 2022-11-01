@@ -9,7 +9,7 @@ export function setLocalStorage(key: any | string, value: any | string) {
         localStorage.setItem(key, value)
     } else if (typeof key === 'object' && !(key instanceof Array)) {
         const itemArr = Object.keys(key)
-        itemArr.map((item) => {
+        itemArr.forEach((item) => {
             setLocalStorage(item, key[item])
         })
     } else {
@@ -25,7 +25,7 @@ export function getLocalStorage(key: string) {
         throw new Error('localStorage required a string key')
     } else {
         let data = localStorage[key]
-        //临时方案解决构建JSON报错
+        // 临时方案解决构建JSON报错
         if (key === 'userInfo' && !data) {
             data = '{}'
         }
@@ -52,15 +52,15 @@ export function getLocalStorageNew(key: string) {
 export function removeLocalStorage(key: any | string | number) {
     if (!key) {
         throw new Error('localStorage required a key')
+    } else if (key instanceof Array) {
+        key.forEach((item) => {
+            removeLocalStorage(item)
+        })
+    } else if (typeof key === 'string') {
+        localStorage.removeItem(key)
     } else {
-        if (key instanceof Array) {
-            key.map((item) => {
-                removeLocalStorage(item)
-            })
-        } else if (typeof key === 'string') {
-            localStorage.removeItem(key)
-        } else {
-            throw new Error('localStorage required a invalid key, you can give an array or string param')
-        }
+        throw new Error(
+            'localStorage required a invalid key, you can give an array or string param'
+        )
     }
 }

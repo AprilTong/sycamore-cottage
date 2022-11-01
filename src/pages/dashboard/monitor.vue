@@ -1,5 +1,5 @@
 <script lang="ts" setup></script>
 
 <template>
-    <div>123</div>
+    <div>监控</div>
 </template>

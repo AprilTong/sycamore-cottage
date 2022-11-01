@@ -1,11 +1,12 @@
 import { createStore } from 'vuex'
+
 import menus from './module/menu'
 
 interface StoreState {
     count: number
 }
 const defaultState = {
-    count: 0,
+    count: 0
 }
 
 export default createStore({
@@ -18,7 +19,7 @@ export default createStore({
     mutations: {
         increment(state: StoreState) {
             state.count++
-        },
+        }
     },
     actions: {
         increment(context) {

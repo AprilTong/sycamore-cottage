@@ -4,13 +4,18 @@ module.exports = {
         es2021: true,
         node: true
     },
-    extends: ['plugin:vue/vue3-essential', 'airbnb-base', 'plugin:prettier/recommended'],
+    extends: [
+        'plugin:vue/vue3-recommended',
+        'plugin:vue/vue3-essential',
+        'airbnb-base',
+        'plugin:prettier/recommended'
+    ],
     parserOptions: {
         ecmaVersion: 12,
         parser: '@typescript-eslint/parser',
         sourceType: 'module'
     },
-    plugins: ['vue', '@typescript-eslint'],
+    plugins: ['vue', '@typescript-eslint', 'prettier', 'import'],
     rules: {
         // 禁止使用 var
         'no-var': 'error',
@@ -25,11 +30,28 @@ module.exports = {
         'no-param-reassign': 'off',
         // 允许使用require
         'global-require': 'off',
-        'import/no-unresolved': [2, { caseSensitiveStrict: true }],
-        'import/resolver': {
-            node: {
-                paths: ['src']
+        'import/no-unresolved': 'off',
+        'import/extensions': [
+            'error',
+            {
+                js: 'never',
+                jsx: 'never',
+                ts: 'never',
+                vue: 'always',
+                png: 'aways',
+                less: 'aways'
             }
-        }
+        ],
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+        // 临时解决vue3的api自动导入报错
+        'no-undef': 0,
+        // 'no-unused-vars': 'off'
+        'prettier/prettier': [
+            'error',
+            {
+                tabWidth: 4,
+                tabSize: 4
+            }
+        ]
     }
 }

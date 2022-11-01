@@ -1,7 +1,6 @@
-
-import { IMenu, IRoute } from '@/types/index'
 import { nextTick } from 'vue'
 import { cloneDeep } from 'lodash'
+import { IMenu, IRoute } from '@/types/index'
 
 /**
  * 菜单相关数据
@@ -22,7 +21,7 @@ const menus = {
         cacheList: [],
         menuList: [],
         dynamicRouteList: [],
-        permissionMenu: '/',
+        permissionMenu: '/'
     },
 
     mutations: {
@@ -61,7 +60,7 @@ const menus = {
             nextTick(() => {
                 state.cacheList = cacheList
             })
-        },
-    },
+        }
+    }
 }
 export default menus

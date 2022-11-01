@@ -20,15 +20,15 @@ export default defineConfig({
             logger: false,
             mockPath: './src/mock',
             localEnabled: true, // 开发打包开关
-            prodEnabled: true, // 生产打包开关,可以控制关闭mock的时候不让mock打包到最终代码内
+            prodEnabled: true // 生产打包开关,可以控制关闭mock的时候不让mock打包到最终代码内
         }),
         AutoImport({
             resolvers: [ElementPlusResolver()],
-            imports: ['vue', 'vue-router', 'vuex', 'vue-i18n', '@vueuse/head', '@vueuse/core'],
+            imports: ['vue', 'vue-router', 'vuex', 'vue-i18n', '@vueuse/head', '@vueuse/core']
         }),
         Components({
             include: [/\.vue$/, /\.vue\?vue/, /\.md$/, /\.tsx$/],
-            exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
+            exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/]
         })
     ],
 
