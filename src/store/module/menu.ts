@@ -1,5 +1,5 @@
 import { nextTick } from 'vue'
-import { cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash-es'
 import { IMenu, IRoute } from '@/types/index'
 
 /**

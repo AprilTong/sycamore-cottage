@@ -65,6 +65,7 @@ const realMenuList = computed(() => {
     height: calc(100% - 48px);
     box-shadow: var(--el-box-shadow-lighter);
     background-color: #fff;
+    width: 200px;
     :deep(.el-scrollbar__view) {
         height: 100%;
     }

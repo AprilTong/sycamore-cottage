@@ -1,60 +1,4 @@
 <template>
-    <!-- <div class="login-container">
-        <div id="login-three-container"></div>
-        <div class="login-plane">
-            <div class="login-plane-container">
-                <img class="login-plane-human" src="@/assets/images/login_human.png" alt="" />
-                <div class="login-plane-title">
-                    登陆
-                    <img
-                        class="login-plane-title-line"
-                        src="@/assets/images/login_horizontal_line.png"
-                        alt=""
-                    />
-                </div>
-                <div class="login-plane-form">
-                    <el-form ref="formRef" :model="formField" :rules="formRules">
-                        <el-form-item prop="user">
-                            <el-input
-                                v-model="formField.user"
-                                placeholder="用户名 / 账号"
-                                type="text"
-                            ></el-input>
-                        </el-form-item>
-                        <el-form-item prop="pass">
-                            <el-input
-                                v-model="formField.pass"
-                                placeholder="密码"
-                                type="password"
-                            ></el-input>
-                        </el-form-item>
-                        <div class="login-code-container">
-                            <el-form-item style="width: 50%" prop="code">
-                                <el-input
-                                    v-model="formField.code"
-                                    placeholder="验证码"
-                                    type="text"
-                                ></el-input>
-                            </el-form-item>
-                            <div class="login-code" @click="getValidateCodeHandle">
-                                <img :src="codeSrc" />
-                            </div>
-                        </div>
-                        <el-form-item prop="autoLogin">
-                            <el-checkbox
-                                v-model="formField.whetherAutoLogin"
-                                label="自动登陆"
-                            ></el-checkbox>
-                        </el-form-item>
-                    </el-form>
-                    <el-button style="width: 100%" type="primary" @click="submitForm">
-                        登录
-                    </el-button>
-                </div>
-            </div>
-        </div>
-        <div class="login-ground"></div>
-    </div> -->
     <section>
         <!-- 背景颜色 -->
         <div class="color"></div>
@@ -95,12 +39,11 @@ import { useRouter } from 'vue-router'
 import { setLocalStorage } from '@/utils/storage'
 import { addRoutes } from '@/router/addRoute'
 import store from '@/store'
+import { loginApi } from '@/api/menu'
 
 export default defineComponent({
     name: 'Login',
     setup() {
-        // 表单对象
-        const formRef = ref(null)
         // 其他状态
         const state = reactive({
             codeSrc: '',
@@ -136,7 +79,7 @@ export default defineComponent({
             //     verifyCode: formField.code
             // }
             // 提交登陆请求
-            const { data } = (await axios.get('/api/user/login')) as any
+            const { data } = await loginApi({})
             const { token, menuList } = data.data
             setLocalStorage('token', token)
             setLocalStorage('menuList', menuList)
@@ -148,18 +91,7 @@ export default defineComponent({
         }
         // 提交表单
         const submitForm = () => {
-            const form: any = unref(formRef)
-            if (!form) return
-            form.validate((valid: any) => {
-                if (valid) {
-                    submitHandle()
-                } else {
-                    ElMessage.warning({
-                        message: '随便输入用户名、密码、验证码即可登陆',
-                        type: 'warning'
-                    })
-                }
-            })
+            submitHandle()
         }
         const refsState = toRefs(state)
         return {
@@ -167,7 +99,6 @@ export default defineComponent({
             formRules,
             formField,
             submitForm,
-            formRef,
             getValidateCodeHandle
         }
     }
@@ -351,8 +282,8 @@ section .color:nth-child(3) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     /* 使用filter(滤镜) 属性，改变颜色。
-    hue-rotate(deg)  给图像应用色相旋转 
-    calc() 函数用于动态计算长度值 
+    hue-rotate(deg)  给图像应用色相旋转
+    calc() 函数用于动态计算长度值
     var() 函数调用自定义的CSS属性值x*/
     filter: hue-rotate(calc(var(--x) * 70deg));
     /* 调用动画animate，需要10s完成动画，

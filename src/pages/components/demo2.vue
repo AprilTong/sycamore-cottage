@@ -14,7 +14,7 @@
 import G6 from '@antv/g6'
 import { onMounted, reactive, ref, nextTick } from 'vue'
 import { renderMap } from './common'
-import { cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash-es'
 
 onMounted(() => {
     initData()
