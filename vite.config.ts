@@ -19,7 +19,8 @@ export default defineConfig({
       logger: false,
       mockPath: './src/mock',
       localEnabled: true, // 开发打包开关
-      prodEnabled: true // 生产打包开关,可以控制关闭mock的时候不让mock打包到最终代码内
+      prodEnabled: true, // 生产打包开关,可以控制关闭mock的时候不让mock打包到最终代码内
+      injectCode: ` import { setupProdMockServer } from './mockProdServer'; setupProdMockServer(); `,
     }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
