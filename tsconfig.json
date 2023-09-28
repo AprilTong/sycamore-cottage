@@ -13,7 +13,8 @@
         "paths": {
             "@/*": ["./src/*"]
         },
-        "types": ["element-plus/global"]
+        "types": ["element-plus/global"],
+        "skipLibCheck": true
     },
     "include": [
         "src/**/*.ts",
@@ -22,5 +23,6 @@
         "src/**/*.vue",
         "auto-imports.d.ts",
         "components.d.ts"
-    ]
+    ],
+    "exclude": ["node_modules"]
 }

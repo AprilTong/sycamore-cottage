@@ -67,7 +67,7 @@ const data = {
 
 const initTreeData = () => {
     G6.registerNode('card-node', {
-        draw: function drawShape(cfg, group) {
+        draw: function drawShape(cfg: any, group) {
             const r = 2
             const color = '#5B8FF9'
             const w = cfg.size[0]
@@ -153,9 +153,11 @@ const initTreeData = () => {
             })
             return shape
         },
-        setState(name, value, item) {
+        setState(name, value, item: any) {
             if (name === 'collapsed') {
-                const marker = item.get('group').find((ele) => ele.get('name') === 'collapse-icon')
+                const marker = item
+                    .get('group')
+                    .find((ele: any) => ele.get('name') === 'collapse-icon')
                 const icon = value ? G6.Marker.expand : G6.Marker.collapse
                 marker.attr('symbol', icon)
             }
@@ -198,6 +200,7 @@ const initTreeData = () => {
     }
 
     const container = document.getElementById('box')
+    if (!container) return
     const width = container.scrollWidth || 1000
     const height = container.scrollHeight || 1000
 
@@ -233,14 +236,14 @@ const initTreeData = () => {
     // graph.setMode('edit')
     graph.render()
     graph.fitView()
-    graph.on('node:click', (e) => {
+    graph.on('node:click', (e: any) => {
         if (e.target.get('name') === 'collapse-icon') {
             e.item.getModel().collapsed = !e.item.getModel().collapsed
             graph.setItemState(e.item, 'collapsed', e.item.getModel().collapsed)
             graph.layout()
         }
     })
-    graph.on('node:click', (e) => {
+    graph.on('node:click', (e: any) => {
         if (e.target.get('name') !== 'collapse-icon' && e.target.get('name') !== 'add-children') {
             const { item } = e
 

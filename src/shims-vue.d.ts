@@ -1,0 +1,2 @@
+
+declare module 'lodash-es'

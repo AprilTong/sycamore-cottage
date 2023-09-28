@@ -1,7 +1,7 @@
 <template>
     <div class="layout-aside" bg-bgColor transition-all duration-300 ease-in-out>
         <el-scrollbar height="100%">
-            <el-menu :default-active="$route.path" :collapse="siderCollapse" h-full>
+            <el-menu :default-active="defaultActive" :collapse="siderCollapse" h-full>
                 <menuTree :menus="realMenuList" />
             </el-menu>
         </el-scrollbar>
@@ -47,6 +47,10 @@ const filterMenu = (menuList: IMenu[]) => {
 }
 const realMenuList = computed(() => {
     return filterMenu(menuStore.menuList)
+})
+const route = useRoute()
+const defaultActive = computed(() => {
+    return route.path
 })
 </script>
 

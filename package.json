@@ -16,7 +16,7 @@
         "@antv/x6": "^1.32.2",
         "@vitejs/plugin-vue-jsx": "^3.0.0",
         "axios": "^0.23.0",
-        "element-plus": "^2.2.2",
+        "element-plus": "^2.3.0",
         "lodash-es": "^4.17.21",
         "vue": "^3.3.4",
         "vue-router": "^4.2.0",
