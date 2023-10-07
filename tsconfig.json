@@ -22,7 +22,8 @@
         "src/**/*.tsx",
         "src/**/*.vue",
         "auto-imports.d.ts",
-        "components.d.ts"
+        "components.d.ts",
+        "src/mockProdServer.js"
     ],
     "exclude": ["node_modules"]
 }
