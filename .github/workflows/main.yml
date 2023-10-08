@@ -35,8 +35,11 @@ jobs:
       - name: pnpm
         uses: pnpm/action-setup@v2
         with:
-          node-version: 18
-          pnpm-version: 8
+          version: 8
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
