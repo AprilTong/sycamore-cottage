@@ -1,29 +1,29 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "useDefineForClassFields": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "strict": true,
-        "jsx": "preserve",
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "lib": ["esnext", "dom"],
-        "paths": {
-            "@/*": ["./src/*"]
-        },
-        "types": ["element-plus/global"],
-        "skipLibCheck": true
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@/*": ["./src/*"]
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "auto-imports.d.ts",
-        "components.d.ts",
-        "src/mockProdServer.js"
-    ],
-    "exclude": ["node_modules"]
+    "types": ["element-plus/global"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "auto-imports.d.ts",
+    "components.d.ts",
+    "src/mockProdServer.ts"
+  ],
+  "exclude": ["node_modules"]
 }
