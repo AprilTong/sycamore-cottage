@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit --skipLibCheck && vite build",
     "serve": "vite preview",
     "prepare": "husky install"
   },
