@@ -1,6 +1,6 @@
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteMockServe } from 'vite-plugin-mock'
 
@@ -20,15 +20,23 @@ export default defineConfig({
       mockPath: './src/mock',
       localEnabled: true, // 开发打包开关
       prodEnabled: true, // 生产打包开关,可以控制关闭mock的时候不让mock打包到最终代码内
-      injectCode: ` import { setupProdMockServer } from './mockProdServer.js'; setupProdMockServer(); `,
+      injectCode: ` import { setupProdMockServer } from './mockProdServer.js'; setupProdMockServer(); `
     }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
-      imports: ['vue', 'vue-router', 'vuex', 'vue-i18n', '@vueuse/head', '@vueuse/core']
+      imports: ['vue', 'vue-router', 'vuex', 'vue-i18n', '@vueuse/head', '@vueuse/core'],
+      // dts: 'src/auto-import.d.ts',
+      dts: false,
+      eslintrc: {
+        enabled: false, // Default `false`
+        filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+        globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+      }
     }),
     Components({
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/, /\.tsx$/],
-      exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/]
+      exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
+      dts: './src/components.d.ts'
     })
   ],
 

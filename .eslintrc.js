@@ -8,7 +8,8 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:vue/vue3-essential',
     'airbnb-base',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    './.eslintrc-auto-import.json'
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -44,7 +45,7 @@ module.exports = {
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     // 临时解决vue3的api自动导入报错
-    'no-undef': 0,
+    // 'no-undef': 0,
     // 'no-unused-vars': 'off'
     'prettier/prettier': [
       'error',
