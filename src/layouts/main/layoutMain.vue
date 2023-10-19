@@ -1,8 +1,4 @@
 <script setup lang="ts">
-// import { useAppStore, useMenuStore } from '@/store'
-// const appStore = useAppStore()
-// const menuStore = useMenuStore()
-// const { cacheList } = storeToRefs(menuStore)
 const store = useStore()
 const { cacheList } = store.state.menus
 </script>
@@ -11,9 +7,7 @@ const { cacheList } = store.state.menus
 <template>
   <router-view v-slot="{ Component, route }">
     <transition name="el-fade-in" mode="out-in" appear>
-      <keep-alive :include="cacheList">
-        <component :is="Component" :key="route.fullPath" />
-      </keep-alive>
+      <component :is="Component" :key="route.fullPath" />
     </transition>
   </router-view>
 </template>

@@ -268,6 +268,9 @@ const initTreeData = () => {
 onMounted(() => {
   initTreeData()
 })
+defineOptions({
+  name: 'tree'
+})
 </script>
 <style lang="less" scoped>
 .right {

@@ -11,24 +11,24 @@ export default [
       message: 'ok',
       data: [
         {
-          title: '组件',
-          icon: 'i-ep-odometer',
+          title: '业务组件',
+          icon: 'icon-folder',
           name: 'dashboard',
           path: '/dashboard',
           children: [
             {
               title: '树图',
-              icon: 'i-icon-park-outline-workbench',
+              icon: 'icon-tree',
               name: 'tree',
               path: '/dashboard/tree',
               component: 'dashboard/tree.vue'
             },
             {
-              title: '监控页',
-              icon: 'i-icon-park-twotone-monitor-camera',
-              name: 'monitor',
-              path: '/dashboard/monitor',
-              component: 'dashboard/monitor.vue'
+              title: '树形表格拖动',
+              icon: 'icon-table',
+              name: 'tableTree',
+              path: '/dashboard/table',
+              component: 'dashboard/table.vue'
             }
           ]
         }

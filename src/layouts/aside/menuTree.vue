@@ -3,7 +3,7 @@
     <template v-if="menu.children && menu.children.length > 0">
       <el-sub-menu :key="menu.path" :index="menu.path">
         <template #title>
-          <el-icon><i :class="menu.icon"></i></el-icon>
+          <i :class="['iconfont', menu.icon]"></i>
           <span truncate>{{ menu.title }}</span>
         </template>
         <menu-tree :menus="menu.children"></menu-tree>
@@ -11,7 +11,7 @@
     </template>
     <template v-else>
       <el-menu-item :key="menu.path" :index="menu.path" @click="clickMenu(menu)">
-        <el-icon><i :class="menu.icon"></i></el-icon>
+        <i :class="['iconfont', menu.icon]"></i>
         <span truncate>{{ menu.title }}</span>
       </el-menu-item>
     </template>
@@ -40,4 +40,8 @@ const clickMenu = (menu: IMenu) => {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+i {
+  margin-right: 5px;
+}
+</style>

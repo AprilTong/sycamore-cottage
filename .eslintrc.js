@@ -2,7 +2,8 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
+    'vue/setup-compiler-macros': true
   },
   extends: [
     'plugin:vue/vue3-recommended',
@@ -12,7 +13,7 @@ module.exports = {
     './.eslintrc-auto-import.json'
   ],
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
     sourceType: 'module'
   },
@@ -60,6 +61,8 @@ module.exports = {
       // we are only using this rule to check for unused arguments since TS
       // catches unused variables but not args.
       { varsIgnorePattern: '.*', args: 'none' }
-    ]
+    ],
+    // 组件命名
+    'vue/multi-word-component-names': 'off'
   }
 }
