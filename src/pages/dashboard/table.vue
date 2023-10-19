@@ -98,57 +98,112 @@ const createTableSort = () => {
       if (!isEqual(dragElClassList, relatelClassList)) return false
       return true
     },
-    onEnd: async (evt: any) => {
+    onEnd: (evt: any) => {
       const { newIndex, oldIndex } = evt
       if (newIndex === oldIndex) return
+      console.log('123', newIndex, oldIndex)
       const expandRow = tableRef.value.getTreeExpandRecords()
       // 展开的数据id
       const expandId = expandRow.map((item: RowVO) => item.id)
       const newTable: any[] = []
       // 将多维数据展开存为一维数据
       const cloneData = tableData.value.map((o) => o)
-      cloneData.forEach((item) => {
-        // 如果有子类，将子类也push进去
-        if (expandId.includes(item.id) && item.children && item.children.length > 0) {
-          newTable.push({
-            ...item,
-            useChild: false
-          })
-          item.children.forEach((i) => {
-            i.parentId = item.id
-            newTable.push(i)
-          })
-        } else {
-          newTable.push({
-            ...item,
-            useChild: true
-          })
-        }
-      })
-      const currRow = cloneDeep(newTable[oldIndex])
-      newTable?.splice(oldIndex, 1)
-      newTable?.splice(newIndex, 0, currRow)
-      // 然后把排序成功后的一维数据转为树形数据
-      const result: any[] = []
-      newTable.forEach((item) => {
-        // 一级
-        if (!item.parentId) {
-          // 设置子级
-          if (!item.useChild) {
-            item.children = newTable.filter((one) => one.parentId === item.id)
+      let count = -1
+      const result = {}
+      const getMap = (data: any[], parentIndex = '') => {
+        data.forEach((item, index) => {
+          // 如果有子类，将子类也push进去
+          item.selfIndex = parentIndex === '' ? `${index}` : `${parentIndex}-${index}`
+          result[++count] = item.selfIndex
+          if (expandId.includes(item.id) && item.children && item.children.length > 0) {
+            getMap(item.children, item.selfIndex)
           }
-          result.push(item)
-        }
-      })
-      // 赋值到数据,可以传给后端
-      tableData.value = result
-      nextTick(() => {
-        tableRef.value.reloadData(result)
-        nextTick(() => {
-          tableRef.value.setTreeExpand(expandRow, true)
         })
+      }
+      getMap(cloneData)
+      // 交换对应的
+      const oldRealIndex = result[oldIndex]
+      const newRealIndex = result[newIndex]
+      if (oldRealIndex.length === 1) {
+        const currRow = cloneDeep(tableData.value[oldIndex])
+        tableData.value?.splice(oldIndex, 1)
+        tableData.value?.splice(newIndex, 0, currRow)
+      } else {
+        const parentIndex = oldRealIndex.slice(0, -2)
+        const tempOldIndex = oldRealIndex.slice(oldRealIndex.length - 1)
+        const tempNewIndex = newRealIndex.slice(oldRealIndex.length - 1)
+        const getCurrent = (arr) => {
+          arr.forEach((item) => {
+            if (item.selfIndex === parentIndex && item.children.length) {
+              const currRow = item.children[tempOldIndex]
+              item.children?.splice(tempOldIndex, 1)
+              item.children?.splice(tempNewIndex, 0, currRow)
+            }
+            if (item.children?.length) {
+              getCurrent(item.children)
+            }
+          })
+        }
+        getCurrent(tableData.value)
+      }
+
+      console.log('123', tableData.value)
+      tableRef.value.reloadData(tableData.value)
+      nextTick(() => {
+        tableRef.value.setTreeExpand(expandRow, true)
       })
     }
+    // onEnd: async (evt: any) => {
+    //   const { newIndex, oldIndex } = evt
+    //   if (newIndex === oldIndex) return
+    //   const expandRow = tableRef.value.getTreeExpandRecords()
+    //   // 展开的数据id
+    //   const expandId = expandRow.map((item: RowVO) => item.id)
+    //   const newTable: any[] = []
+    //   // 将多维数据展开存为一维数据
+    //   const cloneData = tableData.value.map((o) => o)
+    //   cloneData.forEach((item) => {
+    //     // 如果有子类，将子类也push进去
+    //     if (expandId.includes(item.id) && item.children && item.children.length > 0) {
+    //       newTable.push({
+    //         ...item,
+    //         useChild: false
+    //       })
+    //       item.children.forEach((i) => {
+    //         i.parentId = item.id
+    //         newTable.push(i)
+    //       })
+    //     } else {
+    //       newTable.push({
+    //         ...item,
+    //         useChild: true
+    //       })
+    //     }
+    //   })
+    //   const currRow = cloneDeep(newTable[oldIndex])
+    //   newTable?.splice(oldIndex, 1)
+    //   newTable?.splice(newIndex, 0, currRow)
+    //   // 然后把排序成功后的一维数据转为树形数据
+    //   const result: any[] = []
+    //   newTable.forEach((item) => {
+    //     // 一级
+    //     if (!item.parentId) {
+    //       // 设置子级
+    //       if (!item.useChild) {
+    //         item.children = newTable.filter((one) => one.parentId === item.id)
+    //       }
+    //       result.push(item)
+    //     }
+    //   })
+    //   // 赋值到数据,可以传给后端
+    //   tableData.value = result
+    //   nextTick(() => {
+    //     tableRef.value.reloadData(result)
+    //     nextTick(() => {
+    //       tableRef.value.setTreeExpand(expandRow, true)
+    //     })
+    //   })
+    // }
     // onEnd: async (evt: any) => {
     //   const { newIndex, oldIndex } = evt
     //   if (newIndex === oldIndex) return
@@ -217,7 +272,7 @@ onMounted(() => {
   })
 })
 defineOptions({
-  name: 'tableTree'
+  name: 'TableTree'
 })
 </script>
 <style lang="less" scoped>
