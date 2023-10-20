@@ -21,7 +21,17 @@
       </template>
 
       <div class="right-item">
-        <el-dropdown>
+        <div class="el-dropdown-link">
+          <el-avatar
+            :size="30"
+            src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+          />
+          <div class="nickname">
+            April
+            <div i-ep-arrow-down ml-1 />
+          </div>
+        </div>
+        <!-- <el-dropdown>
           <div class="el-dropdown-link">
             <el-avatar
               :size="30"
@@ -39,7 +49,7 @@
               <el-dropdown-item divided @click="onLogout"> 退出登录 </el-dropdown-item>
             </el-dropdown-menu>
           </template>
-        </el-dropdown>
+        </el-dropdown> -->
       </div>
     </el-space>
   </el-header>

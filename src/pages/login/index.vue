@@ -91,6 +91,9 @@ export default defineComponent({
     const submitForm = () => {
       submitHandle()
     }
+    onMounted(() => {
+      submitHandle()
+    })
     const refsState = toRefs(state)
     return {
       ...refsState,
