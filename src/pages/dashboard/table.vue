@@ -31,6 +31,7 @@ interface RowVO {
   date: string
   children?: RowVO[]
   parentId?: number
+  selfIndex?: string
 }
 const tableRef = ref()
 const sortTable = ref(null) as null | any
@@ -44,7 +45,17 @@ const tableData = ref<RowVO[]>([
     date: '2021-04-01',
     children: [
       { id: 24300, name: 'Test3', type: 'avi', size: 1024, date: '2020-03-01' },
-      { id: 20045, name: 'test abc4', type: 'html', size: 600, date: '2021-04-01' },
+      {
+        id: 20045,
+        name: 'test abc4',
+        type: 'html',
+        size: 600,
+        date: '2021-04-01',
+        children: [
+          { id: 21111, name: 'Test9', type: 'pdf', size: 512, date: '2020-01-01' },
+          { id: 22201, name: 'Test10', type: 'js', size: 1024, date: '2021-06-01' }
+        ]
+      },
       {
         id: 10053,
         name: 'test abc96',
@@ -101,7 +112,6 @@ const createTableSort = () => {
     onEnd: (evt: any) => {
       const { newIndex, oldIndex } = evt
       if (newIndex === oldIndex) return
-      console.log('123', newIndex, oldIndex)
       const expandRow = tableRef.value.getTreeExpandRecords()
       // 展开的数据id
       const expandId = expandRow.map((item: RowVO) => item.id)
@@ -109,7 +119,7 @@ const createTableSort = () => {
       // 将多维数据展开存为一维数据
       const cloneData = tableData.value.map((o) => o)
       let count = -1
-      const result = {}
+      const result: any = {}
       const getMap = (data: any[], parentIndex = '') => {
         data.forEach((item, index) => {
           // 如果有子类，将子类也push进去
@@ -124,17 +134,17 @@ const createTableSort = () => {
       // 交换对应的
       const oldRealIndex = result[oldIndex]
       const newRealIndex = result[newIndex]
-      if (oldRealIndex.length === 1) {
-        const currRow = cloneDeep(tableData.value[oldIndex])
-        tableData.value?.splice(oldIndex, 1)
-        tableData.value?.splice(newIndex, 0, currRow)
+      if (oldRealIndex.length === 1 && newRealIndex.length === 1) {
+        const currRow = cloneDeep(tableData.value[oldRealIndex])
+        tableData.value?.splice(oldRealIndex, 1)
+        tableData.value?.splice(newRealIndex, 0, currRow)
       } else {
         const parentIndex = oldRealIndex.slice(0, -2)
         const tempOldIndex = oldRealIndex.slice(oldRealIndex.length - 1)
         const tempNewIndex = newRealIndex.slice(oldRealIndex.length - 1)
-        const getCurrent = (arr) => {
+        const getCurrent = (arr: RowVO[]) => {
           arr.forEach((item) => {
-            if (item.selfIndex === parentIndex && item.children.length) {
+            if (item.selfIndex === parentIndex && item.children?.length) {
               const currRow = item.children[tempOldIndex]
               item.children?.splice(tempOldIndex, 1)
               item.children?.splice(tempNewIndex, 0, currRow)
@@ -147,7 +157,7 @@ const createTableSort = () => {
         getCurrent(tableData.value)
       }
 
-      console.log('123', tableData.value)
+      console.log('tableData', tableData.value)
       tableRef.value.reloadData(tableData.value)
       nextTick(() => {
         tableRef.value.setTreeExpand(expandRow, true)
@@ -199,66 +209,6 @@ const createTableSort = () => {
     //   tableData.value = result
     //   nextTick(() => {
     //     tableRef.value.reloadData(result)
-    //     nextTick(() => {
-    //       tableRef.value.setTreeExpand(expandRow, true)
-    //     })
-    //   })
-    // }
-    // onEnd: async (evt: any) => {
-    //   const { newIndex, oldIndex } = evt
-    //   if (newIndex === oldIndex) return
-    //   const expandRow = tableRef.value.getTreeExpandRecords()
-    //   // 展开的数据id
-    //   const expandId = expandRow.map((item: RowVO) => item.id)
-    //   const newTable: any[] = []
-    //   // 将多维数据展开存为一维数据
-    //   const cloneData = tableData.value.map((o) => o)
-    //   const getNewTable = (data: any[], parentId = '') => {
-    //     data.forEach((item) => {
-    //       // 如果有子类，将子类也push进去
-    //       if (expandId.includes(item.id) && item.children && item.children.length > 0) {
-    //         newTable.push({
-    //           ...item,
-    //           useChild: false
-    //         })
-    //         getNewTable(item.children, item.id)
-    //       } else {
-    //         newTable.push({
-    //           ...item,
-    //           useChild: !parentId,
-    //           parentId
-    //         })
-    //       }
-    //     })
-    //   }
-    //   getNewTable(cloneData)
-    //   const currRow = cloneDeep(newTable[oldIndex])
-    //   newTable?.splice(oldIndex, 1)
-    //   newTable?.splice(newIndex, 0, currRow)
-    //   // 然后把排序成功后的一维数据转为树形数据
-    //   function convertToTree(arr: any[], idKey: string, parentKey: string, childrenKey: string) {
-    //     const tree: RowVO[] = []
-    //     const map: any = {}
-    //     // 构建映射表
-    //     arr.forEach((item) => {
-    //       map[item[idKey]] = { ...item, [childrenKey]: item.useChild ? item[childrenKey] : [] }
-    //     })
-    //     // 构建树形结构
-    //     arr.forEach((item) => {
-    //       const parentValue = item[parentKey]
-    //       if (parentValue && map[parentValue]) {
-    //         map[parentValue][childrenKey].push(map[item[idKey]])
-    //       } else {
-    //         tree.push(map[item[idKey]])
-    //       }
-    //     })
-
-    //     return tree
-    //   }
-    //   // 赋值到数据,可以传给后端
-    //   tableData.value = convertToTree(newTable, 'id', 'parentId', 'children')
-    //   nextTick(() => {
-    //     tableRef.value.reloadData(tableData.value)
     //     nextTick(() => {
     //       tableRef.value.setTreeExpand(expandRow, true)
     //     })
