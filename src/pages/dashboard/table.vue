@@ -158,6 +158,7 @@ const createTableSort = () => {
       }
 
       console.log('tableData', tableData.value)
+      // 赋值到数据,可以传给后端
       tableRef.value.reloadData(tableData.value)
       nextTick(() => {
         tableRef.value.setTreeExpand(expandRow, true)
