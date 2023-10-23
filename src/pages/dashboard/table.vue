@@ -232,6 +232,7 @@ defineOptions({
   height: 100%;
   background-color: #fff;
   padding: 10px;
+  overflow: scroll;
   .title {
     margin-bottom: 8px;
   }
