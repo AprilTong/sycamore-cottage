@@ -29,6 +29,13 @@ export default [
               name: 'tableTree',
               path: '/dashboard/table',
               component: 'dashboard/table.vue'
+            },
+            {
+              title: 'el-menu互相拖动',
+              icon: 'icon-table',
+              name: 'menuSort',
+              path: '/dashboard/menuSort',
+              component: 'dashboard/menuSort.vue'
             }
           ]
         }

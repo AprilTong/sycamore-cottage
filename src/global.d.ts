@@ -4,3 +4,5 @@ interface Response {
   ret: number
   msg: string
 }
+declare module 'vue3-dnd'
+declare module 'react-dnd-html5-backend'

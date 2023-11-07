@@ -1,9 +1,13 @@
 <template>
-  <el-config-provider :locale="locale">
-    <router-view />
-  </el-config-provider>
+  <DndProvider :backend="HTML5Backend">
+    <el-config-provider :locale="locale">
+      <router-view />
+    </el-config-provider>
+  </DndProvider>
 </template>
 <script setup lang="ts">
+import { DndProvider } from 'vue3-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 // import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
