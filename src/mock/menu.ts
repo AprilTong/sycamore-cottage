@@ -30,6 +30,13 @@ export default [
               path: '/dashboard/table',
               component: 'dashboard/table.vue'
             }
+            // {
+            //   title: 'vueRouter两种路由',
+            //   icon: 'icon-table',
+            //   name: 'router',
+            //   path: '/dashboard/router',
+            //   component: 'dashboard/router.vue'
+            // }
           ]
         }
       ]
