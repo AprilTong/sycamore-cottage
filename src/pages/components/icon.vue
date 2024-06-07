@@ -4,13 +4,13 @@
       <template #reference>
         <el-button class="m-2">{{ content }}</el-button>
       </template>
-      <div v-for="item in list" :key="item" @click="click(item)">{{ item.label }}</div>
+      <div v-for="item in list" :key="item.id" @click="click(item)">{{ item.label }}</div>
     </el-popover>
     <span class="interval">的</span>
     <el-cascader v-model="cascaderValue" :options="options" />
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ElButton, ElPopover, ElCascader } from 'element-plus'
 
 const props = defineProps({
@@ -139,7 +139,7 @@ onMounted(() => {
     cascaderValue.value = options[0].value
   }
 })
-const click = (item) => {
+const click = (item: any) => {
   content.value = item.label
   contentId.value = item.id
   visible.value = false
