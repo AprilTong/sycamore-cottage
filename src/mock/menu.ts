@@ -29,6 +29,13 @@ export default [
               name: 'tableTree',
               path: '/dashboard/table',
               component: 'dashboard/table.vue'
+            },
+            {
+              title: 'css的has伪类',
+              // icon: 'icon-table',
+              name: 'cssHas',
+              path: '/dashboard/cssHas',
+              component: 'dashboard/cssHas.vue'
             }
             // {
             //   title: 'vueRouter两种路由',

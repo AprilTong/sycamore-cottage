@@ -1,69 +1,71 @@
 <template>
+  <!-- <tagInput></tagInput> -->
   <div id="box"></div>
-  <!-- <div class="right">
-        <el-button>添加</el-button>
-    </div> -->
+  <div class="right">
+    <el-button>添加</el-button>
+  </div>
 </template>
 <script lang="ts" setup>
 import G6 from '@antv/g6'
+import tagInput from '../components/tagInput.vue'
 
-// const data = {
-//   defaultNode: {
-//     size: 80, // 节点大小
-//     // ...                 // 节点的其他配置
-//     // 节点样式配置
-//     style: {
-//       fill: 'steelblue', // 节点填充色
-//       stroke: '#999', // 节点描边色
-//       lineWidth: 1 // 节点描边粗细
-//     },
-//     // 节点上的标签文本配置
-//     labelCfg: {
-//       // 节点上的标签文本样式配置
-//       style: {
-//         fill: '#fff' // 节点标签文字颜色
-//       }
-//     }
-//   },
-//   // 点集
-//   nodes: [
-//     {
-//       id: 'node1', // String，该节点存在则必须，节点的唯一标识
-//       x: 100, // Number，可选，节点位置的 x 值
-//       y: 200, // Number，可选，节点位置的 y 值
-//       label: 'hello'
-//       // labelCfg: {
-//       //     positions: 'center',
-//       //     style: {
-//       //         fontSize: 20,
-//       //         color: '#f5f5f5'
-//       //     },
-//       //     color: '#f5f5f5'
-//       // },
-//       // style: {
-//       //     // 包裹样式属性的字段 style 与其他属性在数据结构上并行
-//       //     // fill: '#000', // 样式属性，元素的填充色
-//       //     color: '#f5f5f5'
-//       //     // stroke: '#888' // 样式属性，元素的描边色
-//       //     // ...              // 其他样式属性
-//       // }
-//     },
-//     {
-//       id: 'node2', // String，该节点存在则必须，节点的唯一标识
-//       x: 300, // Number，可选，节点位置的 x 值
-//       y: 200, // Number，可选，节点位置的 y 值
-//       label: 'world'
-//     }
-//   ],
-//   // 边集
-//   edges: [
-//     {
-//       source: 'node1', // String，必须，起始点 id
-//       target: 'node2', // String，必须，目标点 id,
-//       label: '我是连线'
-//     }
-//   ]
-// }
+const data = {
+  defaultNode: {
+    size: 80, // 节点大小
+    // ...                 // 节点的其他配置
+    // 节点样式配置
+    style: {
+      fill: 'steelblue', // 节点填充色
+      stroke: '#999', // 节点描边色
+      lineWidth: 1 // 节点描边粗细
+    },
+    // 节点上的标签文本配置
+    labelCfg: {
+      // 节点上的标签文本样式配置
+      style: {
+        fill: '#fff' // 节点标签文字颜色
+      }
+    }
+  },
+  // 点集
+  nodes: [
+    {
+      id: 'node1', // String，该节点存在则必须，节点的唯一标识
+      x: 100, // Number，可选，节点位置的 x 值
+      y: 200, // Number，可选，节点位置的 y 值
+      label: 'hello'
+      // labelCfg: {
+      //     positions: 'center',
+      //     style: {
+      //         fontSize: 20,
+      //         color: '#f5f5f5'
+      //     },
+      //     color: '#f5f5f5'
+      // },
+      // style: {
+      //     // 包裹样式属性的字段 style 与其他属性在数据结构上并行
+      //     // fill: '#000', // 样式属性，元素的填充色
+      //     color: '#f5f5f5'
+      //     // stroke: '#888' // 样式属性，元素的描边色
+      //     // ...              // 其他样式属性
+      // }
+    },
+    {
+      id: 'node2', // String，该节点存在则必须，节点的唯一标识
+      x: 300, // Number，可选，节点位置的 x 值
+      y: 200, // Number，可选，节点位置的 y 值
+      label: 'world'
+    }
+  ],
+  // 边集
+  edges: [
+    {
+      source: 'node1', // String，必须，起始点 id
+      target: 'node2', // String，必须，目标点 id,
+      label: '我是连线'
+    }
+  ]
+}
 
 const initTreeData = () => {
   G6.registerNode('card-node', {
@@ -269,7 +271,7 @@ onMounted(() => {
   initTreeData()
 })
 defineOptions({
-  name: 'tree'
+  name: 'Tree'
 })
 </script>
 <style lang="less" scoped>

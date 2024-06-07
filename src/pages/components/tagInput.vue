@@ -10,22 +10,18 @@
         @keydown.delete="handleDelete($event)"
         @click="inputClick($event)"
       ></div>
-      <div class="tag-box">
-        <span
-          v-for="item in tagList"
-          :key="item.name"
-          class="one-tag"
-          @click="handleAddTag(item.name)"
-        >
+      <div v-if="popoverVisible" class="tag-wrap">
+        <span v-for="item in tagList" :key="item.name" class="one-tag" @click="handleAddTag(item)">
           {{ item.name }}
         </span>
       </div>
     </div>
+    <el-button @click="handleGetValue">获取value</el-button>
   </div>
-  <el-tree-select v-model="value" :data="data" :show-all-levels="true" />
 </template>
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from 'vue'
+import { reactive, ref, onMounted, h, createApp } from 'vue'
+import Icon from './icon.vue'
 
 const state = reactive({
   contentId: `content1`,
@@ -51,76 +47,7 @@ const tagList = reactive([
   }
 ])
 const value = ref()
-const data = [
-  {
-    value: '1',
-    label: 'Level one 1',
-    children: [
-      {
-        value: '1-1',
-        label: 'Level two 1-1',
-        children: [
-          {
-            value: '1-1-1',
-            label: 'Level three 1-1-1'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    value: '2',
-    label: 'Level one 2',
-    children: [
-      {
-        value: '2-1',
-        label: 'Level two 2-1',
-        children: [
-          {
-            value: '2-1-1',
-            label: 'Level three 2-1-1'
-          }
-        ]
-      },
-      {
-        value: '2-2',
-        label: 'Level two 2-2',
-        children: [
-          {
-            value: '2-2-1',
-            label: 'Level three 2-2-1'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    value: '3',
-    label: 'Level one 3',
-    children: [
-      {
-        value: '3-1',
-        label: 'Level two 3-1',
-        children: [
-          {
-            value: '3-1-1',
-            label: 'Level three 3-1-1'
-          }
-        ]
-      },
-      {
-        value: '3-2',
-        label: 'Level two 3-2',
-        children: [
-          {
-            value: '3-2-1',
-            label: 'Level three 3-2-1'
-          }
-        ]
-      }
-    ]
-  }
-]
+const popoverVisible = ref(false)
 const selectHandler = () => {
   // 监听选定文本的变动
   const sel: any = window.getSelection()
@@ -134,18 +61,29 @@ onMounted(() => {
   document.addEventListener('selectionchange', selectHandler)
 })
 const handleInput = (target: any) => {
-  state.currentText = target.innerText
+  const str = target.innerText
+  state.currentText = str
+  if (['+'].includes(str)) {
+    popoverVisible.value = true
+  }
   // console.log('val', val)
 }
 // 添加标签
-const handleAddTag = (text: string) => {
+const handleAddTag = (item: { id: number; name: string }) => {
   // 如果当前input没有聚焦，先聚焦
   if (!state.savedRange) {
     root.value.focus()
     selectHandler()
   }
   const node = document.createElement('span')
-  node.innerText = `<${text}>`
+  const vNode = createApp(Icon, {
+    current: {
+      id: item.id,
+      label: item.name
+    }
+  })
+  vNode.mount(node)
+  // node.innerText = `<${text}>`
   if (state.savedRange.commonAncestorContainer.parentElement.nodeName === 'SPAN') {
     return
   }
@@ -192,6 +130,18 @@ const inputClick = (e: any) => {
     state.currentTagId = null
   }
 }
+const handleGetValue = () => {
+  let result = ''
+  root.value.childNodes.forEach((item: any) => {
+    if (item.nodeName === 'SPAN') {
+      const target = item.querySelector('.test')
+      result += target.getAttribute('data-value')
+    } else {
+      result += item.nodeValue
+    }
+  })
+  console.log('result', result)
+}
 </script>
 <style lang="less" scoped>
 .tag-box {
@@ -200,7 +150,7 @@ const inputClick = (e: any) => {
     margin-right: 10px;
   }
   .tag-input {
-    width: 200px;
+    width: 500px;
     min-height: 100px;
     background: #fff;
     box-sizing: border-box;
@@ -218,12 +168,20 @@ const inputClick = (e: any) => {
       cursor: default;
       -webkit-user-modify: read-only !important;
       padding: 0 10px;
-      color: #26a2ff;
+      // color: #26a2ff;
       cursor: default;
     }
   }
-  .tag-box {
+  .content {
+    position: relative;
+  }
+  .tag-wrap {
     margin-top: 10px;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #999;
+    display: flex;
+    flex-direction: column;
     .one-tag {
       font-size: 14px;
       padding: 0 20px;
@@ -233,6 +191,7 @@ const inputClick = (e: any) => {
       border-radius: 40px;
       margin-right: 5px;
       cursor: pointer;
+      margin-top: 5px;
     }
   }
 }
