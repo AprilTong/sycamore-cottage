@@ -36,6 +36,13 @@ export default [
               name: 'cssHas',
               path: '/dashboard/cssHas',
               component: 'dashboard/cssHas.vue'
+            },
+            {
+              title: 'CSS 计时器',
+              // icon: 'icon-table',
+              name: 'timer',
+              path: '/dashboard/timer',
+              component: 'dashboard/timer.vue'
             }
             // {
             //   title: 'vueRouter两种路由',
