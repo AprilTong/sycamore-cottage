@@ -9,14 +9,14 @@
 ## 开发
 
 ```
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## 发布
 
 ```
-npm run build
+pnpm run build
 ```
 
 ## 参考文章
