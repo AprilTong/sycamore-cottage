@@ -63,6 +63,8 @@ module.exports = {
       { varsIgnorePattern: '.*', args: 'none' }
     ],
     // 组件命名
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    // 在标识符中使用悬垂下划线_
+    'no-underscore-dangle': 'off'
   }
 }

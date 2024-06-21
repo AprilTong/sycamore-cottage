@@ -17,11 +17,11 @@ export default [
           path: '/dashboard',
           children: [
             {
-              title: '树图',
+              title: 'G6树图',
               icon: 'icon-tree',
               name: 'tree',
               path: '/dashboard/tree',
-              component: 'dashboard/tree.vue'
+              component: 'dashboard/tree/index.vue'
             },
             {
               title: '树形表格拖动',
