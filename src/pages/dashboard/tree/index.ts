@@ -51,23 +51,25 @@ export function renderMap(data: any[], graph: Graph): void {
           },
           name: 'add-item'
         })
-        // 删除icon
-        group.addShape('text', {
-          attrs: {
-            x: 110,
-            y: 20,
-            r: 6,
-            fontFamily: 'iconfont',
-            textAlign: 'center',
-            textBaseline: 'middle',
-            text: '\ue74b',
-            fontSize: 14,
-            stroke: '#909399',
-            cursor: 'pointer',
-            opacity: 0
-          },
-          name: 'remove-item'
-        })
+        // 删除icon,根元素不能删除
+        if (cfg.id !== 'root') {
+          group.addShape('text', {
+            attrs: {
+              x: 110,
+              y: 20,
+              r: 6,
+              fontFamily: 'iconfont',
+              textAlign: 'center',
+              textBaseline: 'middle',
+              text: '\ue74b',
+              fontSize: 14,
+              stroke: '#909399',
+              cursor: 'pointer',
+              opacity: 0
+            },
+            name: 'remove-item'
+          })
+        }
 
         if (cfg.sname) {
           group.addShape('text', {

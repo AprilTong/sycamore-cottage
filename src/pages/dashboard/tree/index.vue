@@ -2,9 +2,6 @@
   <div class="tree-wrap">
     <el-button type="primary" class="clear-btn" @click="clearGraph">重置</el-button>
     <div class="content">
-      <div class="add-wrap">
-        <i class="iconfont icon-tianjia" @click="handleAddOneTree"></i>
-      </div>
       <div class="tree-wrap">
         <div id="container" class="one-tree"></div>
         <el-input
@@ -29,7 +26,7 @@ const state = reactive({
   treeData: {
     id: 'root',
     sname: 'root',
-    name: 1,
+    name: uniqueId(),
     children: []
   } as any,
   showInput: false,
@@ -81,12 +78,7 @@ const focusInput = (curId: string) => {
     top: `${canvasXY.y}px`
   }
 }
-const hideRoot = () => {
-  // 隐藏最顶层元素
-  const item = state.graph.findById('root')
-  state.graph.hideItem(item)
-  state.graph.translate(-100, 0)
-}
+
 const handleAddOneTree = () => {
   state.showInput = false
   const id = uniqueId()
@@ -100,7 +92,6 @@ const handleAddOneTree = () => {
   state.editType = 'add'
   renderMap(state.treeData, state.graph)
   focusInput(curId)
-  hideRoot()
 }
 
 const addEvent = (graph: any) => {
@@ -183,8 +174,7 @@ const clearGraph = () => {
     name: 1,
     children: []
   }
-  state.graph.destroy()
-  state.graph = null
+  renderMap(state.treeData, state.graph)
 }
 const mapTree = (item: any) => {
   const haveChildren = Array.isArray(item.children) && item.children.length > 0
@@ -202,7 +192,6 @@ onMounted(() => {
     state.graph.clear()
     addEvent(state.graph)
     renderMap(state.treeData, state.graph)
-    hideRoot()
   })
 })
 </script>
@@ -223,19 +212,7 @@ onMounted(() => {
     background-color: #f5f5f5;
     padding: 10px;
     display: flex;
-    .add-wrap {
-      width: 30px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      i {
-        font-size: 22px;
-        cursor: pointer;
-        &:hover {
-          color: #2196f3;
-        }
-      }
-    }
+
     .tree-wrap {
       flex: 1;
       overflow: auto;

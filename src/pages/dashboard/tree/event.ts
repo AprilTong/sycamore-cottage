@@ -21,6 +21,7 @@ export function collapseNode(graph: Graph): void {
 export function mouseenterNode(graph: Graph): void {
   graph.on('node:mouseover', (evt: any) => {
     const { item, target } = evt
+    if (item._cfg.id === 'root') return
     const canHoverName = ['node-rect', 'remove-item']
     if (!canHoverName.includes(target.get('name'))) return
 
@@ -44,6 +45,7 @@ export function mouseLeaveNode(graph: Graph): void {
   graph.on('node:mouseout', (evt: any) => {
     const { item, target } = evt
     const canHoverName = ['node-rect', 'remove-item']
+    if (item._cfg.id === 'root') return
     if (!canHoverName.includes(target.get('name'))) return
     // 隐藏icon
     const deleteItem = item.get('group').find(function (el: any) {
