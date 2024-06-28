@@ -60,39 +60,6 @@ const blurNodeInput = () => {
 
   state.showInput = false
 }
-const focusInput = (curId: string) => {
-  // state.graph.focusItem(curId)
-  // const canvasXY = state.graph.getViewPortCenterPoint()
-  const curTarget = state.graph.findDataById(curId)
-  state.editOne = curTarget
-  const canvasXY = state.graph.getCanvasByPoint(curTarget.x, curTarget.y)
-  state.input = ''
-  setTimeout(() => {
-    state.showInput = true
-    nextTick(() => {
-      inputRref.value.focus()
-    })
-  }, 200)
-  state.inputStyle = {
-    left: `${canvasXY.x - 100}px`,
-    top: `${canvasXY.y}px`
-  }
-}
-
-const handleAddOneTree = () => {
-  state.showInput = false
-  const id = uniqueId()
-  const curId = uniqueId()
-  state.treeData.children.push({
-    id: curId,
-    sname: '',
-    name: id,
-    parentId: 'root'
-  })
-  state.editType = 'add'
-  renderMap(state.treeData, state.graph)
-  focusInput(curId)
-}
 
 const addEvent = (graph: any) => {
   graph.on('node:click', (evt: any) => {
@@ -175,15 +142,6 @@ const clearGraph = () => {
     children: []
   }
   renderMap(state.treeData, state.graph)
-}
-const mapTree = (item: any) => {
-  const haveChildren = Array.isArray(item.children) && item.children.length > 0
-  const { id, sname } = item
-  return {
-    id,
-    sname,
-    children: haveChildren ? item.children.map((el: any) => mapTree(el)) : []
-  }
 }
 
 onMounted(() => {
