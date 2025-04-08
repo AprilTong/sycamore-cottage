@@ -4,7 +4,7 @@
 
 ## 在线预览
 
-[点击查看](https://april-tong.com/sycamore-cottage)
+[点击查看](https://april-tong.cn/sycamore-cottage)
 
 ## 开发
 
