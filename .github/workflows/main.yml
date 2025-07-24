@@ -30,28 +30,40 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Node
-        uses: actions/setup-node@v3
-      - name: pnpm
+
+      - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7
-      - name: Use Node.js ${{ matrix.node-version }}
+
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '18'
           cache: 'pnpm'
+
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile && pnpm install
+        run: pnpm install --frozen-lockfile
+
       - name: Build
         run: pnpm run build
+
+      - name: Debug - List dist contents
+        run: |
+          echo "Checking if dist directory exists:"
+          ls -la
+          echo "Dist directory contents:"
+          ls -la dist/ || echo "Dist directory not found"
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist repository
           path: './dist'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
