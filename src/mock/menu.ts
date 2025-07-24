@@ -43,7 +43,7 @@ export default [
               name: 'timer',
               path: '/dashboard/timer',
               component: 'dashboard/timer.vue'
-            }
+            },
             // {
             //   title: 'vueRouter两种路由',
             //   icon: 'icon-table',
@@ -51,6 +51,18 @@ export default [
             //   path: '/dashboard/router',
             //   component: 'dashboard/router.vue'
             // }
+            {
+              title: 'shadow dom',
+              name: 'shadowDom',
+              path: '/dashboard/shadowDom',
+              component: 'dashboard/shadowDom.vue'
+            },
+            {
+              title: 'computed实现双向绑定',
+              name: 'computed',
+              path: '/dashboard/computed',
+              component: 'dashboard/computed.vue'
+            }
           ]
         }
       ]

@@ -50,6 +50,7 @@ export default defineConfig({
       '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
     }
   },
+  // base: './',
   base: '/sycamore-cottage/', // 设置打包路径
   server: {
     port: 4000, // 设置服务启动端口号
